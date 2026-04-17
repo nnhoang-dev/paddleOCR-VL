@@ -1,0 +1,5 @@
+fastapi
+uvicorn[standard]
+python-multipart
+paddleocr[doc-parser]
+paddlepaddle==3.2.1
