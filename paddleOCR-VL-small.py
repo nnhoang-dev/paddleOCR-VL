@@ -85,10 +85,6 @@ pipeline = PaddleOCRVL(
     use_doc_orientation_classify=False,
     use_doc_unwarping=False,
     use_chart_recognition=False,
-    transformers_model_kwargs={
-        "torch_dtype": "float16",
-        "attn_implementation": "flash_attention_2",  # giảm ~30% VRAM nếu GPU hỗ trợ
-    }
 )
 
 
