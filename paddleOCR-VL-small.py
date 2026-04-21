@@ -56,14 +56,12 @@
 
 import os
 
-import torch
-
 
 # Tối ưu memory trước khi import torch/transformers
 os.environ["TRANSFORMERS_TORCH_DTYPE"] = "float16"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"   # tránh warning + deadlock trên macOS
 os.environ["OMP_NUM_THREADS"] = "1"              # giới hạn CPU threads cho numpy/torch
-os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+
 
 from pathlib import Path
 from paddleocr import PaddleOCRVL
@@ -81,7 +79,7 @@ t0 = time.time()
 
 pipeline = PaddleOCRVL(
     engine="transformers",
-    device="gpu",
+    device="cpu",
     use_doc_orientation_classify=False,
     use_doc_unwarping=False,
     use_chart_recognition=False,
@@ -100,7 +98,7 @@ pages_res = []
 for i, page in enumerate(pipeline.predict(PDF_PATH)):
     pages_res.append(page)
     print(f"  → Page {i+1} done")
-    torch.cuda.empty_cache()
+
 
 print(f"✅ Predicted {len(pages_res)} pages ({time.time()-t1:.1f}s)")
 
