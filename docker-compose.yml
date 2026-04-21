@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  paddleocr:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: paddleocr-api
+    ports:
+      - "${PORT:-8000}:8000"
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      - S3_ENDPOINT_URL=${S3_ENDPOINT_URL}
+      - S3_BUCKET=${S3_BUCKET:-pdf-markdown-converter}
+      - S3_BASE_URL=${S3_BASE_URL}
+      - S3_PUBLIC_BASE_URL=${S3_PUBLIC_BASE_URL}
+      - S3_ACL=${S3_ACL:-public-read}
+    volumes:
+      - /tmp:/tmp
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

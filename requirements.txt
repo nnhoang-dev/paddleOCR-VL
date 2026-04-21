@@ -1,5 +1,14 @@
 fastapi
 uvicorn[standard]
 python-multipart
-paddleocr[doc-parser]
-paddlepaddle==3.2.1
+python-dotenv
+boto3
+pymupdf
+paddlepaddle
+torch==2.11.0
+torchvision==0.26.0
+paddleocr==3.5.0
+paddlex[ocr]==3.5.0
+transformers
+accelerate
+bitsandbytes
