@@ -61,7 +61,7 @@ class RAMMonitor:
         )
 
 # ── Config ─────────────────────────────────────────────────────────────────
-PDF_PATH   = "./picture.pdf"
+PDF_PATH   = "./picture-10-pages.pdf"
 output_dir = Path("./output")
 output_dir.mkdir(parents=True, exist_ok=True)
 TMP_DIR    = Path("/tmp/pdf_pages")
