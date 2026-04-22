@@ -1,4 +1,5 @@
 from pathlib import Path
+import time
 
 from paddleocr import PaddleOCRVL
 
@@ -21,7 +22,9 @@ pipeline = PaddleOCRVL()
 # pipeline = PaddleOCRVL(use_doc_orientation_classify=True) # Use use_doc_orientation_classify to enable/disable document orientation classification model
 # pipeline = PaddleOCRVL(use_doc_unwarping=True) # Use use_doc_unwarping to enable/disable document unwarping module
 # pipeline = PaddleOCRVL(use_layout_detection=False) # Use use_layout_detection to enable/disable layout detection module
-
+timenow = time.time()
 output = pipeline.predict("./picture.pdf")
 for res in output:
     res.save_to_markdown(save_path=output_dir) ## Save the current image's result in Markdown format
+
+print(f"✅ Done! ({time.time()-timenow:.1f}s)")
